@@ -2,9 +2,10 @@
 
 Create by Reactjs(redux)
 
-## Create by
-Bongkot Saelo
+## Live Version
 
-## Issues
+https://hhelsinki.github.io/warehouse_client/
+
+### Issues
 
 ยังไม่เสร็จสมบูรณ์ 100% นะคะ ><
