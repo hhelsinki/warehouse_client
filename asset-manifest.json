@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/warehouse_client/static/css/main.b3a66c9a.css",
+    "main.js": "/warehouse_client/static/js/main.45fd4aa2.js",
+    "static/js/787.231a8822.chunk.js": "/warehouse_client/static/js/787.231a8822.chunk.js",
+    "index.html": "/warehouse_client/index.html",
+    "main.b3a66c9a.css.map": "/warehouse_client/static/css/main.b3a66c9a.css.map",
+    "main.45fd4aa2.js.map": "/warehouse_client/static/js/main.45fd4aa2.js.map",
+    "787.231a8822.chunk.js.map": "/warehouse_client/static/js/787.231a8822.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b3a66c9a.css",
+    "static/js/main.45fd4aa2.js"
+  ]
+}
