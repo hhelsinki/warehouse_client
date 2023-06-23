@@ -21,7 +21,7 @@ const items = (state = initialState, action) => {
             const newitem = {
                 id: Date.now(),
                 code: state.code,
-                name: state.title,
+                title: state.title,
                 stock: state.stock,
                 location: state.location,
                 unit: state.unit,
@@ -48,13 +48,13 @@ const items = (state = initialState, action) => {
             var index = newList.indexOf(state.item);
             if (index !== -1) {
                 newList[index].code = state.code;
-                newList[index].name = state.title;
+                newList[index].title = state.title;
                 newList[index].stock = state.stock;
                 newList[index].location = state.location;
                 newList[index].unit = state.unit;
                 newList[index].amount = state.amount;
                 newList[index].price_unit = state.price_unit;
-                newList[index].price_total = state.price_total;
+                newList[index].price_total = (state.amount * state.price_unit)*1;
                 return {
                     ...state,
                     code: '',

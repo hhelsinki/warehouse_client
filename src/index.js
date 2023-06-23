@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import reducer from './store/reducers'
-import Todo from './Todo/index'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 
 const store = createStore(reducer);
@@ -14,7 +14,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <Todo />
+    <Router>
+      <App />
+    </Router>
   </Provider>
 );
 

@@ -35,34 +35,34 @@ const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editIt
     }
 
     return (
-        <article data-name='goods receive input' style={{width:'30vw', background:'grey'}}>
+        <article data-name='goods receive input' style={{width:'25vw', background:'grey'}}>
             <h2>Please Enter...</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Product Code: </label>
+            <form onSubmit={handleSubmit} className='m-3'>
+                <label style={{width:'35%', display:'inline-block'}}>Product Code: </label>
                 <input type="text" onChange={(e) => setCode(e.target.value)} value={code} />
                 <br />
-                <label>Product Name: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Product Name: </label>
                 <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
                 <br />
-                <label>Stock: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Stock: </label>
                 <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} />
                 <br />
-                <label>Location: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Location: </label>
                 <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} />
                 <br />
-                <label>Unit: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Unit: </label>
                 <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} />
                 <br />
-                <label>Amount: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Amount: </label>
                 <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} />
                 <br />
-                <label>Price/Unit: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Price/Unit: </label>
                 <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} />
                 <br />
-                <label>Total Price: </label>
+                <label style={{width:'35%', display:'inline-block'}}>Total Price: </label>
                 <input type="text" value={price_total} readOnly/>
                 <br />
-                <button type="submit">{edit ? 'Edit' : 'Add'}</button>
+                <button type="submit" style={{padding:'8px 12px', display:'block', margin:'5px auto 0 auto'}}>{edit ? 'Edit' : 'Add'}</button>
             </form>
         </article>
     );
