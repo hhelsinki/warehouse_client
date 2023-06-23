@@ -10,6 +10,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Navigate replace to='/goods-receive'/>}></Route>
+        <Route path='/warehouse_client' element={<GoodsReceive/>}/>
         <Route path='/goods-receive' element={<GoodsReceive/>}/>
         <Route path='/issue-stock' element={<IssueStock/>}/>
         <Route path='/all-stock' element={<AllStock/>}/>
