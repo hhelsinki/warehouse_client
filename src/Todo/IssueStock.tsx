@@ -1,33 +1,32 @@
 import { useSelector } from "react-redux";
-import Form from "./Form";
-import ProductList from "./ProductList";
-import { useState } from "react";
+import FormIS from "./FormIS";
+import ProductListIS from "./ProductListIS";
+import { ChangeEvent, useState } from "react";
 //import {items} from "../store/reducers";
 import '../css/global.css';
 import '../css/home.scss';
 import Header from "./Header";
 
-function GoodsReceive() {
-    const items = useSelector((state) => state.items);
+function IssueStock() {
+    const items = useSelector((state:any) => state.items);
     const [seller, setSeller] = useState({
         id: '', name: ''
     });
     const [doc, setDoc] = useState({
-        code: 'R01', type: 'Seller', no: '', date: '', ref: '', ref_date: ''
+        code: 'S01', type: 'เบิกขาย', no: '', date: '', ref: '', ref_date: ''
     });
     const [recorder, setRecorder] = useState({
         code: 'EMP-00001', name: 'Kanya Pasook'
     });
-    const [DO, setDO] = useState({
-        no: '', dep_code: '004-PU', dep_title: 'Buyning Deparment', receiver_code: 'EMP-00002', receiver_name: 'Somchai Mana'
-    })
+    const [DP, setDP] = useState({
+        no: '', dep_code: '003-SL', dep_title: 'แผนกขายสินค้า', receiver_code: 'EMP-00003', receiver_name: 'Pannee Poochai'
+    });
     const [remark, setRemark] = useState({
         i: '', ii: ''
-    })
+    });
 
 
-
-    const handleSeller = (e) => {
+    const handleSeller = (e:ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
         switch (e.target.value) {
             case 'VEN-00006':
@@ -40,7 +39,7 @@ function GoodsReceive() {
                 break;
         }
     }
-    const handleDocDate = (e) => {
+    const handleDocDate = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.length === 2 || e.target.value.length === 5) {
             e.target.value += '/';
             return;
@@ -55,12 +54,12 @@ function GoodsReceive() {
         <div className="m-3">
         <Header/>
             <article data-name='goods receive' style={{ height: '35vh' }}>
-                <h1 className="text-center">Goods Receive</h1>
+                <h1 className="text-center">Issue Stock</h1>
                 <form onSubmit={(e) => e.preventDefault} >
                     <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '10px' }}>
                         <div style={{ border: '1px solid grey' }}>
                             <label style={{ width: '10%', display: 'inline-block' }}>Seller no.</label>
-                            <select name='seller id' onChange={handleSeller} style={{ width: '25%' }}>
+                            <select name='seller id' onChange={()=>handleSeller} style={{ width: '25%' }}>
                                 <option value=''>Pick Seller</option>
                                 <option value='VEN-00006'>VEN-00006</option>
                                 <option value='VEN-00007'>VEN-00007</option>
@@ -76,7 +75,7 @@ function GoodsReceive() {
                             <label style={{ width: '10%', display: 'inline-block' }}>Doc no.</label>
                             <input type='text' onChange={(e) => setDoc({ ...doc, no: e.target.value })} placeholder="RS5206-00003" style={{ width: '24%' }} />
                             <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Doc date</label>
-                            <input type="text" onChange={handleDocDate} placeholder="date/month/year" maxLength={10} style={{ width: '20%' }} />
+                            <input type="text" onChange={()=>handleDocDate} placeholder="date/month/year" maxLength={10} style={{ width: '20%' }} />
                             <br />
                             <label style={{ width: '10%', display: 'inline-block' }}>Doc ref</label>
                             <input type='text' onChange={(e) => setDoc({ ...doc, ref: e.target.value })} style={{ width: '24%' }} />
@@ -91,22 +90,22 @@ function GoodsReceive() {
                         </div>
 
                         <div style={{ border: '1px solid grey' }}>
-                            <div style={{padding:'8px 0', border:'1px solid green', width:'50%', textAlign:'center', margin: '5px auto 0 auto'}}>Goods Receive</div>
+                            <div style={{padding:'8px 0', border:'1px solid green', width:'50%', textAlign:'center', margin: '5px auto 0 auto'}}>Issue Stock</div>
                             <br/>
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>DO no.</label>
-                            <input type='text' onChange={(e) => setDO({ ...DO, no: e.target.value })} style={{width:'24%'}}/>
+                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>DP no.</label>
+                            <input type='text' onChange={(e) => setDP({ ...DP, no: e.target.value })} style={{width:'24%'}}/>
                             <br />
                             <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Department</label>
                             <select name='department' style={{width:'25%'}}>
-                                <option value={DO.dep_code}>004-PU</option>
+                                <option value={DP.dep_code}>003-SL</option>
                             </select>
-                            <input type="text" value={DO.dep_title} readOnly style={{marginLeft:'5px'}}/>
+                            <input type="text" value={DP.dep_title} readOnly style={{marginLeft:'5px'}}/>
                             <br />
                             <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Receiver</label>
                             <select name='receiver' style={{width:'25%'}}>
-                                <option value={DO.receiver_code}>EMP-00002</option>
+                                <option value={DP.receiver_code}>EMP-00003</option>
                             </select>
-                            <input type="text" value={DO.receiver_name} readOnly style={{marginLeft:'5px'}}/>
+                            <input type="text" value={DP.receiver_name} readOnly style={{marginLeft:'5px'}}/>
 
                         </div>
                     </div>
@@ -126,11 +125,11 @@ function GoodsReceive() {
                 </form>
             </article>
             <div style={{ height:'50vh', display: 'flex' }}>
-                <ProductList />
-                <Form />
+                <ProductListIS />
+                <FormIS />
             </div>
         </div>
     );
 }
 
-export default GoodsReceive;
+export default IssueStock;

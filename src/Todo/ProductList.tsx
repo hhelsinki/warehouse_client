@@ -1,8 +1,13 @@
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions'
 
-function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, deleteItem, setLocation, setUnit, setAmount, setPriceUnit, setPriceTotal }) {
-    const handleEdit = (item) => {
+interface List {
+    todoList:string [], setCode:any, setTitle:any, setStock:any, setItem:any, setEdit:any, deleteItem:any, setLocation:any, setUnit:any, setAmount:any, setPriceUnit:any, setPriceTotal:any
+}
+
+function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, deleteItem, setLocation, setUnit, setAmount, setPriceUnit, setPriceTotal }: List) {
+    
+    const handleEdit = (item: any) => {
         setCode(item.code)
         setTitle(item.title);
         //extension
@@ -17,7 +22,7 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
         setItem(item);
     }
 
-    const handleDelete = (item) => {
+    const handleDelete = (item:any) => {
         setItem(item);
         deleteItem();
     }
@@ -40,11 +45,11 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
                         <div className='text-center'>Price/Unit</div>
                         <div className='text-center'>Total Price</div>
                     </div>
-                    {todoList.map((item, index) => {
-                        let totalAmount = todoList.reduce(function (prev, current) {
-                            return prev + +current.amount
+                    {todoList.map((item:any, index:number) => {
+                        let totalAmount = todoList.reduce((prev:any, current:any) => {
+                            return prev + + current.amount
                         }, 0);
-                        let totalPrice= todoList.reduce(function (prev, current) {
+                        let totalPrice= todoList.reduce((prev:any, current:any) => {
                             return prev + +current.price_total
                         }, 0);
                         //console.log(totalAmount)
@@ -80,25 +85,25 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
     );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
     return {
         todoList: state.items
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch:any) => {
     return {
-        setCode: (code) => dispatch(actionTypes.setCode(code)),
-        setTitle: (title) => dispatch(actionTypes.setTitle(title)),
-        setStock: (stock) => dispatch(actionTypes.setStock(stock)),
-        setLocation: (location) => dispatch(actionTypes.setLocation(location)),
-        setUnit: (unit) => dispatch(actionTypes.setUnit(unit)),
-        setAmount: (amount) => dispatch(actionTypes.setAmount(amount)),
-        setPriceUnit: (price_unit) => dispatch(actionTypes.setPriceUnit(price_unit)),
-        setPriceTotal: (price_total) => dispatch(actionTypes.setPriceTotal(price_total)),
+        setCode: (code:string) => dispatch(actionTypes.setCode(code)),
+        setTitle: (title:string) => dispatch(actionTypes.setTitle(title)),
+        setStock: (stock:string) => dispatch(actionTypes.setStock(stock)),
+        setLocation: (location:string) => dispatch(actionTypes.setLocation(location)),
+        setUnit: (unit:string) => dispatch(actionTypes.setUnit(unit)),
+        setAmount: (amount:number) => dispatch(actionTypes.setAmount(amount)),
+        setPriceUnit: (price_unit:number) => dispatch(actionTypes.setPriceUnit(price_unit)),
+        setPriceTotal: (price_total:number) => dispatch(actionTypes.setPriceTotal(price_total)),
 
-        setItem: (item) => dispatch(actionTypes.setItem(item)),
-        deleteItem: (item) => dispatch(actionTypes.deleteItem(item)),
+        setItem: (item:string []) => dispatch(actionTypes.setItem(item)),
+        deleteItem: (item:string []) => dispatch(actionTypes.deleteItem(item)),
         setEdit: () => dispatch(actionTypes.setEdit())
     }
 }
