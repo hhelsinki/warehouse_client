@@ -38,25 +38,25 @@ const FormIS = ({ code__is, setCodeIS, title__is, setTitleIS, stock__is, setStoc
             <h2>Please Enter...</h2>
             <form onSubmit={handleSubmit} className='m-3'>
                 <label style={{width:'35%', display:'inline-block'}}>Product Code: </label>
-                <input type="text" onChange={(e) => setCodeIS(e.target.value)} value={code__is} />
+                <input type="text" onChange={(e) => setCodeIS(e.target.value)} value={code__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Product Name: </label>
-                <input type="text" onChange={(e) => setTitleIS(e.target.value)} value={title__is} />
+                <input type="text" onChange={(e) => setTitleIS(e.target.value)} value={title__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Stock: </label>
-                <input type="text" onChange={(e) => setStockIS(e.target.value)} value={stock__is} />
+                <input type="text" onChange={(e) => setStockIS(e.target.value)} value={stock__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Location: </label>
-                <input type="text" onChange={(e) => setLocationIS(e.target.value)} value={location__is} />
+                <input type="text" onChange={(e) => setLocationIS(e.target.value)} value={location__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Unit: </label>
-                <input type="text" onChange={(e) => setUnitIS(e.target.value)} value={unit__is} />
+                <input type="text" onChange={(e) => setUnitIS(e.target.value)} value={unit__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Amount: </label>
-                <input type="number" onChange={(e) => setAmountIS(e.target.value)} value={amount__is} />
+                <input type="number" onChange={(e) => setAmountIS(e.target.value)} value={amount__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Price/Unit: </label>
-                <input type="number" onChange={(e) => setPriceUnitIS(e.target.value)} value={price_unit__is} />
+                <input type="number" onChange={(e) => setPriceUnitIS(e.target.value)} value={price_unit__is} required/>
                 <br />
                 <label style={{width:'35%', display:'inline-block'}}>Total Price: </label>
                 <input type="text" value={price_total__is} readOnly/>

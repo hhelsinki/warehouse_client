@@ -1,5 +1,5 @@
 import axios from "axios";
-import Header from "./Header";
+import Header from "../part/Header";
 import { useEffect, useState } from "react";
 
 

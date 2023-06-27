@@ -5,6 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import IssueStock from './Todo/IssueStock';
 import AllStock from './Todo/AllStock';
 import GoodsReceive from './Todo/GoodsReceive';
+import History from './component/History';
+import HistoryResult from './component/HistoryResult';
 function App() {
   return (
     <>
@@ -14,6 +16,8 @@ function App() {
         <Route path='/goods-receive' element={<GoodsReceive/>}/>
         <Route path='/issue-stock' element={<IssueStock/>}/>
         <Route path='/all-stock' element={<AllStock/>}/>
+        <Route path='/history/:typeId' element={<History/>}/>
+        <Route path='/history/:typeId/:queryId' element={<HistoryResult/>}/>
       </Routes>
     </>
   );

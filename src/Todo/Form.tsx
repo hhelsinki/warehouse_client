@@ -26,25 +26,25 @@ const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editIt
             <h2>Please Enter...</h2>
             <form onSubmit={handleSubmit} className='m-3'>
                 <label style={{ width: '35%', display: 'inline-block' }}>Product Code: </label>
-                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} />
+                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Product Name: </label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
+                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Stock: </label>
-                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} />
+                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Location: </label>
-                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} />
+                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Unit: </label>
-                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} />
+                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Amount: </label>
-                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} />
+                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Price/Unit: </label>
-                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} />
+                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} required/>
                 <br />
                 <label style={{ width: '35%', display: 'inline-block' }}>Total Price: </label>
                 <input type="text" value={price_total} readOnly />

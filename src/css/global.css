@@ -1,7 +1,16 @@
 
 
+.dp-flex {display:flex;}
+
 .m-3 {margin:.75rem}
 
 .overflow-y-scroll {overflow-y: scroll;}
 
 .text-center {text-align: center;}
+
+/*custom*/
+.width-seven-vw {width:70vw;}
+.width-three-vw {width:29vw;}
+.width-seven {width:70%;}
+.width-five {width:50%;}
+.width-three {width:29%;}
