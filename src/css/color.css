@@ -1,0 +1,12 @@
+:root {
+    --bg-prim: rgb(245, 245, 245);
+    --bg-second: rgb(19, 60, 132);
+    --butt-red: rgb(171, 107, 107);
+    --butt-green: rgb(146, 209, 146);
+    --butt-blue: rgb(175, 175, 236);
+    --butt-edit: rgb(219, 219, 170);
+    --butt-del: rgb(137, 24, 24);
+    --tr-grey: #ddd;
+
+    --form-blue: #eef2f5;
+}

@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions'
 
 interface List {
-    todoList:string [], setCode:any, setTitle:any, setStock:any, setItem:any, setEdit:any, deleteItem:any, setLocation:any, setUnit:any, setAmount:any, setPriceUnit:any, setPriceTotal:any
+    todoList: string[], setCode: any, setTitle: any, setStock: any, setItem: any, setEdit: any, deleteItem: any, setLocation: any, setUnit: any, setAmount: any, setPriceUnit: any, setPriceTotal: any
 }
 
 function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, deleteItem, setLocation, setUnit, setAmount, setPriceUnit, setPriceTotal }: List) {
-    
+
     const handleEdit = (item: any) => {
         setCode(item.code)
         setTitle(item.title);
@@ -22,7 +22,7 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
         setItem(item);
     }
 
-    const handleDelete = (item:any) => {
+    const handleDelete = (item: any) => {
         setItem(item);
         deleteItem();
     }
@@ -30,50 +30,50 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
     //console.log(todoList)
 
     return (
-        <article data-name='goods receive output' style={{ width: '74vw' }} className='overflow-y-scroll'>
+        <article data-name='goods receive output' className='gr__insert-display overflow-y-scroll'>
             {!todoList.length ?
-                <p style={{ textAlign: 'center' }}>No data to Display</p> :
+                <p className='text-center'>No data to Display</p> :
                 (<div>
-                    <div className='dp-flex'>
+                    <div className='flex gr__list bg-prim'>
                         <div className='text-center'>No.</div>
-                        <div className='text-center'>Product No.</div>
-                        <div className='text-center'>Product Name</div>
-                        <div className='text-center'>Stock</div>
-                        <div className='text-center'>Location</div>
-                        <div className='text-center'>Unit</div>
-                        <div className='text-center'>Amount</div>
-                        <div className='text-center'>Price/Unit</div>
-                        <div className='text-center'>Total Price</div>
+                        <div className='text-center'>รหัสสินค้า</div>
+                        <div className='text-center'>ชื่อสินค้า</div>
+                        <div className='text-center'>คลัง</div>
+                        <div className='text-center'>ที่เก็บ</div>
+                        <div className='text-center'>หน่วยนับ</div>
+                        <div className='text-center'>จำนวน</div>
+                        <div className='text-center'>ราคา/หน่วย</div>
+                        <div className='text-center'>จำนวนเงิน</div>
                     </div>
-                    {todoList.map((item:any, index:number) => {
-                        let totalAmount = todoList.reduce((prev:any, current:any) => {
+                    {todoList.map((item: any, index: number) => {
+                        let totalAmount = todoList.reduce((prev: any, current: any) => {
                             return prev + + current.amount
                         }, 0);
-                        let totalPrice= todoList.reduce((prev:any, current:any) => {
+                        let totalPrice = todoList.reduce((prev: any, current: any) => {
                             return prev + +current.price_total
                         }, 0);
                         //console.log(totalAmount)
                         return (
                             <>
-                            <div style={{position:'absolute', bottom:'0'}}>Amount Total: {totalAmount}, Total Price: {totalPrice}</div>
-                                <div key={index} className='dp-flex'>
+                                <div className="gr__total">รวมจำนวน: {totalAmount.toLocaleString()} | เงิน: {totalPrice.toLocaleString()}</div>
+                                <div key={index} className='flex gr__list'>
                                     <div>{index + 1}</div>
                                     <div>{item.code}</div>
-                                    <div>{item.title}</div>
+                                    <div>{item.title.substring(0, 22)}{item.title.length >= 22 && '...'}</div>
                                     <div>{item.stock}</div>
                                     <div>{item.location}</div>
                                     <div>{item.unit}</div>
-                                    <div>{item.amount}</div>
-                                    <div>{item.price_unit}</div>
-                                    <div>{item.price_total}</div>
+                                    <div className="text-right">{item.amount}</div>
+                                    <div className="text-right">{item.price_unit}</div>
+                                    <div className="text-right">{item.price_total}</div>
 
                                     {todoList ? (<>
-                                        <button type='button' onClick={() => handleEdit(item)}>Edit</button>
-                                        <button type='button' onClick={() => handleDelete(item)}>Delete</button>
+                                        <button type='button' onClick={() => handleEdit(item)} className='butt-edit border-0'>Edit</button>
+                                        <button type='button' onClick={() => handleDelete(item)} className='butt-del col-white border-0'>Delete</button>
                                     </>) : <></>}
 
                                 </div>
-                                
+
                             </>
 
                         );
@@ -82,28 +82,29 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
                 </div>)
             }
         </article>
+        
     );
 }
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: any) => {
     return {
         todoList: state.items
     }
 }
 
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
-        setCode: (code:string) => dispatch(actionTypes.setCode(code)),
-        setTitle: (title:string) => dispatch(actionTypes.setTitle(title)),
-        setStock: (stock:string) => dispatch(actionTypes.setStock(stock)),
-        setLocation: (location:string) => dispatch(actionTypes.setLocation(location)),
-        setUnit: (unit:string) => dispatch(actionTypes.setUnit(unit)),
-        setAmount: (amount:number) => dispatch(actionTypes.setAmount(amount)),
-        setPriceUnit: (price_unit:number) => dispatch(actionTypes.setPriceUnit(price_unit)),
-        setPriceTotal: (price_total:number) => dispatch(actionTypes.setPriceTotal(price_total)),
+        setCode: (code: string) => dispatch(actionTypes.setCode(code)),
+        setTitle: (title: string) => dispatch(actionTypes.setTitle(title)),
+        setStock: (stock: string) => dispatch(actionTypes.setStock(stock)),
+        setLocation: (location: string) => dispatch(actionTypes.setLocation(location)),
+        setUnit: (unit: string) => dispatch(actionTypes.setUnit(unit)),
+        setAmount: (amount: number) => dispatch(actionTypes.setAmount(amount)),
+        setPriceUnit: (price_unit: number) => dispatch(actionTypes.setPriceUnit(price_unit)),
+        setPriceTotal: (price_total: number) => dispatch(actionTypes.setPriceTotal(price_total)),
 
-        setItem: (item:string []) => dispatch(actionTypes.setItem(item)),
-        deleteItem: (item:string []) => dispatch(actionTypes.deleteItem(item)),
+        setItem: (item: string[]) => dispatch(actionTypes.setItem(item)),
+        deleteItem: (item: string[]) => dispatch(actionTypes.deleteItem(item)),
         setEdit: () => dispatch(actionTypes.setEdit())
     }
 }

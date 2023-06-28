@@ -22,34 +22,34 @@ const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editIt
     }
 
     return (
-        <article data-name='goods receive input' style={{ width: '25vw', background: 'grey' }}>
-            <h2>Please Enter...</h2>
+        <article data-name='goods receive input' className="gr__insert">
+            <h3 className='text-center'>เพิ่มสินค้า...</h3>
             <form onSubmit={handleSubmit} className='m-3'>
-                <label style={{ width: '35%', display: 'inline-block' }}>Product Code: </label>
-                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} required/>
+                <label>รหัสสินค้า: </label>
+                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Product Name: </label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required/>
+                <label>ชื่อสินค้า: </label>
+                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Stock: </label>
-                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} required/>
+                <label>คลัง: </label>
+                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Location: </label>
-                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} required/>
+                <label>ที่เก็บ: </label>
+                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Unit: </label>
-                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} required/>
+                <label>หน่วยนับ: </label>
+                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Amount: </label>
-                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} required/>
+                <label>จำนวน: </label>
+                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Price/Unit: </label>
-                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} required/>
+                <label>ราคา/หน่วย: </label>
+                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} />
                 <br />
-                <label style={{ width: '35%', display: 'inline-block' }}>Total Price: </label>
+                <label>จำนวนเงิน: </label>
                 <input type="text" value={price_total} readOnly />
                 <br />
-                <button type="submit" style={{ padding: '8px 12px', display: 'block', margin: '5px auto 0 auto' }}>{edit ? 'Edit' : 'Add'}</button>
+                <button type="submit" className='border-0'>{edit ? 'Edit' : 'Add'}</button>
             </form>
         </article>
     );

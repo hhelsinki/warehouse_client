@@ -6,7 +6,9 @@ import IssueStock from './Todo/IssueStock';
 import AllStock from './Todo/AllStock';
 import GoodsReceive from './Todo/GoodsReceive';
 import History from './component/History';
-import HistoryResult from './component/HistoryResult';
+import HistoryResultGR from './component/HistoryResultGR';
+import HistoryResultIS from './component/HistoryResultIS';
+
 function App() {
   return (
     <>
@@ -17,7 +19,8 @@ function App() {
         <Route path='/issue-stock' element={<IssueStock/>}/>
         <Route path='/all-stock' element={<AllStock/>}/>
         <Route path='/history/:typeId' element={<History/>}/>
-        <Route path='/history/:typeId/:queryId' element={<HistoryResult/>}/>
+        <Route path='/history/history-gr/:queryId' element={<HistoryResultGR/>}/>
+        <Route path='/history/history-is/:queryId' element={<HistoryResultIS/>}/>
       </Routes>
     </>
   );

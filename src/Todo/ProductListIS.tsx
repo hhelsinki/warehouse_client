@@ -28,21 +28,20 @@ function ProductListIS({ todoList, setCodeIS, setTitleIS, setStockIS, setItemIS,
 
 
     return (
-        <article data-name='goods receive output' style={{ width: '74vw' }} className='overflow-y-scroll'>
-            <button onClick={()=> window.location.reload()}>Discard</button>
+        <article data-name='goods receive output' className='gr__insert-display overflow-y-scroll'>
             {!todoList.length ?
-                <p style={{ textAlign: 'center' }}>No data to Display</p> :
+                <p className='text-center'>No data to Display</p> :
                 (<div>
-                    <div className='dp-flex'>
+                    <div className='flex gr__list bg-prim bg-prim'>
                         <div className='text-center'>No.</div>
-                        <div className='text-center'>Product No.</div>
-                        <div className='text-center'>Product Name</div>
-                        <div className='text-center'>Stock</div>
-                        <div className='text-center'>Location</div>
-                        <div className='text-center'>Unit</div>
-                        <div className='text-center'>Amount</div>
-                        <div className='text-center'>Price/Unit</div>
-                        <div className='text-center'>Total Price</div>
+                        <div className='text-center'>รหัสสินค้า</div>
+                        <div className='text-center'>ชื่อสินค้า</div>
+                        <div className='text-center'>คลัง</div>
+                        <div className='text-center'>ที่เก็บ</div>
+                        <div className='text-center'>หน่วยนับ</div>
+                        <div className='text-center'>จำนวน</div>
+                        <div className='text-center'>ราคา/หน่วย</div>
+                        <div className='text-center'>จำนวนเงิน</div>
                     </div>
                     {todoList.map((item:any, index:number) => {
                         let totalAmount = todoList.reduce((prev:any, current:any) => {
@@ -54,22 +53,21 @@ function ProductListIS({ todoList, setCodeIS, setTitleIS, setStockIS, setItemIS,
                         //console.log(totalAmount)
                         return (
                             <>
-                            <div style={{position:'absolute', bottom:'0'}}>Amount Total: {totalAmount}, Total Price: {totalPrice}</div>
-                            
-                                <div key={index} className='dp-flex'>
+                            <div className="gr__total">รวมจำนวน: {totalAmount} | เงิน: {totalPrice}</div>
+                                <div key={index} className='flex gr__list'>
                                     <div>{index + 1}</div>
                                     <div>{item.code__is}</div>
-                                    <div>{item.title__is}</div>
+                                    <div>{item.title__is.substring(0, 22)}{item.title.length >= 22 && '...'}</div>
                                     <div>{item.stock__is}</div>
                                     <div>{item.location__is}</div>
                                     <div>{item.unit__is}</div>
-                                    <div>{item.amount__is}</div>
-                                    <div>{item.price_unit__is}</div>
-                                    <div>{item.price_total__is}</div>
+                                    <div className="text-right">{item.amount__is}</div>
+                                    <div className="text-right">{item.price_unit__is}</div>
+                                    <div className="text-right">{item.price_total__is}</div>
 
                                     {todoList ? (<>
-                                        <button type='button' onClick={() => handleEdit(item)}>Edit</button>
-                                        <button type='button' onClick={() => handleDelete(item)}>Delete</button>
+                                        <button type='button' onClick={() => handleEdit(item)} className='butt-edit border-0'>Edit</button>
+                                        <button type='button' onClick={() => handleDelete(item)} className='butt-del col-white border-0'>Delete</button>
                                     </>) : <></>}
 
                                 </div>

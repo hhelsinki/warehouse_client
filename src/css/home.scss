@@ -1,17 +1,57 @@
 
 .border-df {border:1px solid black;}
+.border-radius-df {border-radius: 8px;}
 
-.list__item {
-    div {border:1px solid black;}
-    div:nth-child(1) {width:3%}
-    div:nth-child(2) {width:15%}
-    div:nth-child(3) {width:20%}
-    div:nth-child(4) {width:7%}
-    div:nth-child(5) {width:7%}
-    div:nth-child(6) {width:7%}
-    div:nth-child(7) {width:10%}
-    div:nth-child(8) {width:10%}
-    div:nth-child(9) {width:10%}
+.header { 
+    button {padding:5px 8px; @extend .border-radius-df; margin:0 5px; 
+        &:hover {opacity: 1;}
+        a {color:#000;}
+    }
 }
+.footer { 
+    button {padding:5px 8px; border:0; @extend .border-radius-df; margin:0 5px; opacity: .8;
+        &:hover {opacity:1; transition:.3s;}
+    }
+}
+
+.gr__headline, .gr__content {height:43vh;}
+.gr__credential-i { display:grid; grid-template-columns:auto auto; gap:10px;
+    div { padding:10px 25px; background:var(--form-blue); 
+        label {padding-right:5px;}
+        select {width:25%;}
+        div { padding:8px 0; border: 1px solid var(--butt-green); margin: 5px auto 0 auto; }
+    }
+}
+.gr__insert {width:25vw; border:1px solid var(--butt-green); @extend .border-radius-df;
+    form {
+        label {width:32%; display:inline-block;}
+        input {width:65%;}
+        button {padding:8px 12px; display:block; margin:5px auto 0 auto; background: var(--bg-second); color:#fff; @extend .border-radius-df;}
+    }
+}
+.gr__insert-display {width:74vw;}
+
+.gr__list { &:hover {background:whitesmoke;}
+    div {border-top:1px solid var(--tr-grey); border-bottom:1px solid var(--tr-grey); 
+        
+    }
+    div:nth-child(1) {width:3%; border-left:1px solid var(--tr-grey); border-right:1px solid var(--tr-grey);}
+    div:nth-child(2) {width:15%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(3) {width:20%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(4) {width:7%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(5) {width:7%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(6) {width:7%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(7) {width:10%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(8) {width:10%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(9) {width:10%; border-right:1px solid var(--tr-grey);}
+
+    button { border-radius:4px; padding:3px 7px;}
+}
+.gr__total {position: absolute; bottom:2vh; right:65vh;}
+
+.history__list {
+    div {border:1px solid var(--tr-grey);}
+}
+.history__list-option {border:1px solid var(--tr-grey); border-radius:8px;}
 
 

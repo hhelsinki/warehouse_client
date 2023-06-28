@@ -1,0 +1,16 @@
+.stock__list { width:100%; &:hover {background:whitesmoke;}
+    div {border-top:1px solid var(--tr-grey); border-bottom:1px solid var(--tr-grey); 
+        
+    }
+    div:nth-child(1) {width:3%; border-left:1px solid var(--tr-grey); border-right:1px solid var(--tr-grey);}
+    div:nth-child(2) {width:15%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(3) {width:28%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(4) {width:8%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(5) {width:8%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(6) {width:8%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(7) {width:10%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(8) {width:10%; border-right:1px solid var(--tr-grey);}
+    div:nth-child(9) {width:10%; border-right:1px solid var(--tr-grey);}
+
+    button { border-radius:4px; padding:3px 7px;}
+}

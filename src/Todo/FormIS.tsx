@@ -34,34 +34,34 @@ const FormIS = ({ code__is, setCodeIS, title__is, setTitleIS, stock__is, setStoc
     }
 
     return (
-        <article data-name='goods receive input' style={{width:'25vw', background:'grey'}}>
-            <h2>Please Enter...</h2>
+        <article data-name='goods receive input' className="gr__insert">
+             <h3 className='text-center'>เพิ่มสินค้า...</h3>
             <form onSubmit={handleSubmit} className='m-3'>
-                <label style={{width:'35%', display:'inline-block'}}>Product Code: </label>
+                <label>รหัสสินค้า: </label>
                 <input type="text" onChange={(e) => setCodeIS(e.target.value)} value={code__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Product Name: </label>
+                <label>ชื่อสินค้า: </label>
                 <input type="text" onChange={(e) => setTitleIS(e.target.value)} value={title__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Stock: </label>
+                <label>คลัง: </label>
                 <input type="text" onChange={(e) => setStockIS(e.target.value)} value={stock__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Location: </label>
+                <label>ที่เก็บ: </label>
                 <input type="text" onChange={(e) => setLocationIS(e.target.value)} value={location__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Unit: </label>
+                <label>หน่วยนับ: </label>
                 <input type="text" onChange={(e) => setUnitIS(e.target.value)} value={unit__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Amount: </label>
+                <label>จำนวน: </label>
                 <input type="number" onChange={(e) => setAmountIS(e.target.value)} value={amount__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Price/Unit: </label>
+                <label>ราคา/หน่วย: </label>
                 <input type="number" onChange={(e) => setPriceUnitIS(e.target.value)} value={price_unit__is} required/>
                 <br />
-                <label style={{width:'35%', display:'inline-block'}}>Total Price: </label>
+                <label>จำนวนเงิน: </label>
                 <input type="text" value={price_total__is} readOnly/>
                 <br />
-                <button type="submit" style={{padding:'8px 12px', display:'block', margin:'5px auto 0 auto'}}>{edit__is ? 'Edit' : 'Add'}</button>
+                <button type="submit" className='border-0'>{edit__is ? 'Edit' : 'Add'}</button>
             </form>
         </article>
     );

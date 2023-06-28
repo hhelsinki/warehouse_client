@@ -1,14 +1,17 @@
 import { useSelector } from "react-redux";
 import FormIS from "./FormIS";
 import ProductListIS from "./ProductListIS";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 //import {items} from "../store/reducers";
 import '../css/global.css';
 import '../css/home.scss';
 import Header from "../part/Header";
+import Footer from "../part/Footer";
+import { Link } from "react-router-dom";
 
 function IssueStock() {
-    const items = useSelector((state:any) => state.items);
+    const items = useSelector((state: any) => state.items);
+    const [historyPath, setHistoryPath] = useState<string>('');
     const [seller, setSeller] = useState({
         id: '', name: ''
     });
@@ -26,7 +29,7 @@ function IssueStock() {
     });
 
 
-    const handleSeller = (e:ChangeEvent<HTMLInputElement>) => {
+    const handleSeller = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value)
         switch (e.target.value) {
             case 'VEN-00006':
@@ -50,84 +53,100 @@ function IssueStock() {
     console.log(doc.date)
 
     //console.log(items);
+    useEffect(() => {
+        let currentPath: string = window.location.pathname;
+        if (currentPath === '/goods-receive') {
+            setHistoryPath('../history/history-gr');
+            return;
+        }
+        if (currentPath === '/issue-stock') {
+            setHistoryPath('../history/history-is');
+            return;
+        }
+    }, []);
     return (
-        <div className="m-3">
-        <Header/>
-            <article data-name='goods receive' style={{ height: '35vh' }}>
-                <h1 className="text-center">Issue Stock</h1>
+        <div className="width-l m-auto p-df">
+            <Header />
+            <article data-name='issue stock' className="gr__headline">
+                <h1 className="text-center">จ่ายสินค้า</h1>
                 <form onSubmit={(e) => e.preventDefault} >
-                    <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '10px' }}>
-                        <div style={{ border: '1px solid grey' }}>
-                            <label style={{ width: '10%', display: 'inline-block' }}>Seller no.</label>
-                            <select name='seller id' onChange={()=>handleSeller} style={{ width: '25%' }} required>
-                                <option value=''>Pick Seller</option>
+                    <div className="gr__credential-i">
+                        <div className="rounded-lg">
+                            <label className="width-two inline-block">รหัสลูกค้า</label>
+                            <select name='seller id' onChange={handleSeller} required>
+                                <option value=''>กรุณาเลือก</option>
                                 <option value='VEN-00006'>VEN-00006</option>
                                 <option value='VEN-00007'>VEN-00007</option>
                             </select>
-                            <input type="text" value={seller.name}  style={{ margin: '5px', width: '40%' }} readOnly/>
+                            <input type="text" value={seller.name} className="width-four m-1-5" readOnly />
                             <br />
-                            <label style={{ width: '10%', display: 'inline-block' }}>Doc list</label>
-                            <select name='doc list' style={{ width: '25%' }} required>
+                            <label className="width-two inline-block">รายการเอกสาร</label>
+                            <select name='doc list' required>
                                 <option value='R01'>R01</option>
                             </select>
-                            <input type="text" value={doc.type}  style={{ margin: '5px', width: '40%' }} readOnly/>
+                            <input type="text" value={doc.type} className="width-four m-1-5" readOnly />
                             <br />
-                            <label style={{ width: '10%', display: 'inline-block' }}>Doc no.</label>
-                            <input type='text' onChange={(e) => setDoc({ ...doc, no: e.target.value })} placeholder="RS5206-00003" style={{ width: '24%' }} required/>
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Doc date</label>
-                            <input type="text" onChange={()=>handleDocDate} placeholder="date/month/year" maxLength={10} style={{ width: '20%' }} required/>
+                            <label className="width-two inline-block">เลขที่เอกสาร</label>
+                            <input type='text' onChange={(e) => setDoc({ ...doc, no: e.target.value })} placeholder="RS5206-00003" className="width-two-four" required />
+                            <label className="inline-block width-one-nine m-1-5">วันที่เอกสาร</label>
+                            <input type="text" onChange={() => handleDocDate} placeholder="date/month/year" maxLength={10} className="width-two" required />
                             <br />
-                            <label style={{ width: '10%', display: 'inline-block' }}>Doc ref</label>
-                            <input type='text' onChange={(e) => setDoc({ ...doc, ref: e.target.value })} style={{ width: '24%' }} />
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Doc date ref</label>
-                            <input type="text" onChange={(e) => setDoc({ ...doc, ref_date: e.target.value })} placeholder="date/month/year" style={{ width: '20%' }} />
+                            <label className="width-two inline-block">เลขที่เอกสารอ้างอิง</label>
+                            <input type='text' onChange={(e) => setDoc({ ...doc, ref: e.target.value })} className="width-two-four" />
+                            <label className="inline-block width-one-nine m-1-5">วันที่เอกสารอ้างอิง</label>
+                            <input type="text" onChange={(e) => setDoc({ ...doc, ref_date: e.target.value })} placeholder="date/month/year" className="width-two" />
                             <br />
-                            <label style={{ width: '10%', display: 'inline-block' }}>Recorder</label>
-                            <select name="recorder" style={{ width: '25%' }} required>
+                            <label className="width-two inline-block">ผู้บันทึก</label>
+                            <select name="recorder" required>
                                 <option value={recorder.code}>EMP-00001</option>
                             </select>
-                            <input type="text" value={recorder.name}  style={{ margin: '5px', width: '40%' }} readOnly/>
+                            <input type="text" value={recorder.name} className="width-four m-1-5" readOnly />
                         </div>
 
-                        <div style={{ border: '1px solid grey' }}>
-                            <div style={{padding:'8px 0', border:'1px solid green', width:'50%', textAlign:'center', margin: '5px auto 0 auto'}}>Issue Stock</div>
-                            <br/>
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>DP no.</label>
-                            <input type='text' onChange={(e) => setDP({ ...DP, no: e.target.value })} style={{width:'24%'}}/>
+                        <div className="rounded-lg">
+                            <div className="width-five text-center">Issue Stock</div>
                             <br />
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Department</label>
-                            <select name='department' style={{width:'25%'}} required>
+                            <label className="inline-block width-two-five m-1-5">เลขที่ใบ DP</label>
+                            <input type='text' onChange={(e) => setDP({ ...DP, no: e.target.value })} className="width-two-four" />
+                            <br />
+                            <label className="inline-block width-two-five m-1-5">แผนก</label>
+                            <select name='department' required>
                                 <option value={DP.dep_code}>003-SL</option>
                             </select>
-                            <input type="text" value={DP.dep_title}  style={{marginLeft:'5px'}} readOnly/>
+                            <input type="text" value={DP.dep_title} className="width-four ml-1-5" readOnly />
                             <br />
-                            <label style={{ display: 'inline-block', margin: '5px', width: '19%' }}>Receiver</label>
-                            <select name='receiver' style={{width:'25%'}} required>
+                            <label className="inline-block width-two-five m-1-5">ผู้ส่งสินค้า</label>
+                            <select name='receiver' required>
                                 <option value={DP.receiver_code}>EMP-00003</option>
                             </select>
-                            <input type="text" value={DP.receiver_name}  style={{marginLeft:'5px'}} readOnly/>
+                            <input type="text" value={DP.receiver_name} className="width-four ml-1-5" readOnly />
 
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', marginTop:'5px' }}>
-                        <div style={{ width: '10%' }}>
-                            <label>Remark</label>
+                    <div className="flex mt-1-5">
+                        <div className="width-one">
+                            <label>หมายเหตุ</label>
                         </div>
-                        <div style={{ width: '80%' }}>
-                            <input type="text" onChange={(e)=> setRemark({...remark, i: e.target.value})} style={{ width: '90%', float: 'right' }} />
+                        <div className="width-eigth">
+                            <input type="text" onChange={(e) => setRemark({ ...remark, i: e.target.value })} className="width-nine float-right" />
                             <br />
-                            <input type="text" onChange={(e)=> setRemark({...remark, ii: e.target.value})} style={{ width: '90%', float: 'right', marginTop:'5px' }} />
+                            <input type="text" onChange={(e) => setRemark({ ...remark, ii: e.target.value })} className="width-nine float-right mt-1-5" />
                         </div>
                     </div>
 
 
                 </form>
             </article>
-            <div style={{ height:'50vh', display: 'flex' }}>
+            <article data-name='issue stock insert' className="gr__content flex">
                 <ProductListIS />
                 <FormIS />
-            </div>
+            </article>
+            <article data-name='submit' className="footer">
+                <Link to={historyPath}><button type="button">ประวัติ</button></Link>
+                <button type="button" onClick={() => window.location.reload()} className="butt-del col-white">X Discard</button>
+                <button type="button" className="butt-green">Save</button>
+            </article>
         </div>
     );
 }
