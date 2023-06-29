@@ -8,6 +8,11 @@ import '../css/home.scss';
 import Header from "../part/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Warning from "../common/Warning";
+
+interface APIerr {
+    active: boolean, txt: string, txtColor:string
+}
 
 function GoodsReceive() {
     const items = useSelector((state: any) => state.items);
@@ -19,18 +24,20 @@ function GoodsReceive() {
         code: 'R01', type: 'ซื้อสินค้า', no: '', date: '', ref: '', ref_date: ''
     });
     const [recorder, setRecorder] = useState({
-        code: 'EMP-00001', name: 'Kanya Pasook'
+        code: 'EMP-00001', name: 'กัญญา เป็นสุข'
     });
     const [DO, setDO] = useState({
-        no: '', dep_code: '004-PU', dep_title: 'แผนกจัดซื้อ', receiver_code: 'EMP-00002', receiver_name: 'Somchai Mana'
+        no: '', dep_code: '004-PU', dep_title: 'แผนกจัดซื้อ', receiver_code: 'EMP-00002', receiver_name: 'สมชาย มานะ'
     });
     const [remark, setRemark] = useState({
         i: '', ii: ''
     });
+    const [isApiErr, setApiErr] = useState<APIerr>({
+        active: false, txt: '', txtColor: 'col-green text-center'
+    });
 
 
     const handleSeller = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
         switch (e.target.value) {
             case 'VEN-00006':
                 setSeller({ id: 'VEN-00006', name: 'Green staionary' });
@@ -42,57 +49,73 @@ function GoodsReceive() {
                 break;
         }
     }
-    const handleDocDate = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value.length === 2 || e.target.value.length === 5) {
-            e.target.value += '/';
-            return;
-        }
-        setDoc({ ...doc, date: e.target.value });
+    const handleDocDate = () => {
+        const date = new Date();
+        setDoc({ ...doc, date: date.toLocaleDateString('th-TH') });
     }
 
-    const handleSubmit = () => {
-        const data = {
-            "seller_id": "VEN-00008",
-            "seller_name": "MK",
-            "doc_code": "R02",
-            "doc_type": "ซื้อสินต้า",
-            "doc_no": "RS5201-00002",
-            "doc_date": "09/06/2566",
-            "doc_ref": "",
-            "doc_ref__date": "",
-            "recorder_code": "EMP-00001",
-            "recorder_name": "สมหญิง เป็นสุข",
-            "do_no": "",
-            "do_department__code": "004-PU",
-            "do_department__title": "แผนกจัดซื้อ",
-            "do_receiver__code": "EMP-00002",
-            "do_receiver__name": "กัญญา มาดี",
-            "remark__i": "",
-            "remark__ii": "",
-            dataArray: [],
-            total_amount:,
-            total_price:
+    const handleSubmit = async () => {
+        let newTotal = items;
+        const totalAmount = newTotal.reduce((prev:number, {amount}: {amount:number})=> {
+            return prev + (amount * 1);
+        }, 0);
+        const totalPrice = newTotal.reduce((prev:number, {price_total}:{price_total:number})=> {
+            return prev + price_total;
+        }, 0);
 
+        const data = {
+            seller_id: seller.id,
+            seller_name: seller.name,
+            doc_code: doc.code,
+            doc_type: doc.type,
+            doc_no: doc.no,
+            doc_date: doc.date,
+            doc_ref: doc.ref,
+            doc_ref__date: doc.ref_date,
+            recorder_code: recorder.code,
+            recorder_name: recorder.name,
+            do_no: DO.no,
+            do_department__code: DO.dep_code,
+            do_department__title: DO.dep_title,
+            do_receiver__code: DO.receiver_code,
+            do_receiver__name: DO.receiver_name,
+            remark__i: remark.i,
+            remark__ii: remark.ii,
+            dataArray: items,
+            total_amount: totalAmount,
+            total_price: totalPrice
         }
         const config = {
-            method: 'GET',
+            method: 'POST',
             url: `${process.env.REACT_APP_API}/goods-receive`,
             data: data
         }
+        //console.log(data)
 
-        axios(config)
-            .then((res) => {
-
-            })
-            .catch((err) => {
-                console.log('err API: /goods-receive')
-            })
+        try {
+            const res = await axios(config);
+            console.log(res.data)
+            switch(res.data.status) {
+                case true:
+                    setApiErr({...isApiErr, active:true, txt: res.data.msg });
+                    setTimeout(()=>{setApiErr({...isApiErr, active:false }); window.location.reload();}, 5000);
+                    return; 
+                case false: default:
+                    setApiErr({active:true, txt: res.data.msg, txtColor: 'col-red text-center' });
+                    setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
+                    return;
+            }
+        }
+        catch (err) {
+            console.log('err API: /goods-receive');
+        }
     }
 
-    console.log(seller)
 
     //console.log(items);
     useEffect(() => {
+        handleDocDate();
+
         let currentPath: string = window.location.pathname;
         if (currentPath === '/goods-receive') {
             setHistoryPath('../history/history-gr');
@@ -103,6 +126,7 @@ function GoodsReceive() {
             return;
         }
     }, []);
+
     return (
         <div className="width-l m-auto p-df">
             <Header />
@@ -112,7 +136,7 @@ function GoodsReceive() {
                     <form onSubmit={(e) => e.preventDefault} >
                         <div className="gr__credential-i">
                             <div className="rounded-lg">
-                                <label className="width-two inline-block">รหัสผู้ซื้อ</label>
+                                <label className="width-two inline-block">รหัสผู้ซื้อ<i className="col-red">&#42;</i></label>
                                 <select name='seller id' onChange={handleSeller} required>
                                     <option value=''>กรุณาเลือก</option>
                                     <option value='VEN-00006'>VEN-00006</option>
@@ -126,10 +150,10 @@ function GoodsReceive() {
                                 </select>
                                 <input type="text" value={doc.type} className="width-four m-1-5" readOnly />
                                 <br />
-                                <label className="width-two inline-block">เลขที่เอกสาร</label>
-                                <input type='text' onChange={(e) => setDoc({ ...doc, no: e.target.value })} placeholder="RS5206-00003" className="width-two-four" required />
-                                <label className="inline-block width-one-nine m-1-5">วันที่เอกสาร</label>
-                                <input type="text" onChange={() => handleDocDate} className="width-two" placeholder="date/month/year" maxLength={10} required />
+                                <label className="width-two inline-block">เลขที่เอกสาร<i className="col-red">&#42;</i></label>
+                                <input type='text' onChange={(e) => setDoc({ ...doc, no: e.target.value })} placeholder="GR5206-00003" className="width-two-four" required />
+                                <label className="inline-block width-one-nine m-1-5">วันที่เอกสาร<i className="col-red">&#42;</i></label>
+                                <input type="text" value={doc.date} className="width-two" placeholder="date/month/year" maxLength={10} readOnly />
                                 <br />
                                 <label className="width-two inline-block">เลขที่เอกสารอ้างอิง</label>
                                 <input type='text' onChange={(e) => setDoc({ ...doc, ref: e.target.value })} className="width-two-four" />
@@ -185,8 +209,11 @@ function GoodsReceive() {
                 <article data-name='submit' className="footer">
                     <Link to={historyPath}><button type="button">ประวัติ</button></Link>
                     <button type="button" onClick={() => window.location.reload()} className="butt-del col-white">X Discard</button>
-                    <button type="button" className="butt-green">Save</button>
+                    <button type="button" onClick={handleSubmit} className="butt-green">Save</button>
                 </article>
+
+                {/*modal warning */}
+                {isApiErr.active && (<Warning txt={isApiErr.txt} col={isApiErr.txtColor}/>)}
             </main>
 
         </div>

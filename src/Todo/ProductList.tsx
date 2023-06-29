@@ -63,9 +63,9 @@ function ProductList({ todoList, setCode, setTitle, setStock, setItem, setEdit, 
                                     <div>{item.stock}</div>
                                     <div>{item.location}</div>
                                     <div>{item.unit}</div>
-                                    <div className="text-right">{item.amount}</div>
-                                    <div className="text-right">{item.price_unit}</div>
-                                    <div className="text-right">{item.price_total}</div>
+                                    <div className="text-right">{item.amount.toLocaleString()}</div>
+                                    <div className="text-right">{item.price_unit.toLocaleString()}</div>
+                                    <div className="text-right">{item.price_total.toLocaleString()}</div>
 
                                     {todoList ? (<>
                                         <button type='button' onClick={() => handleEdit(item)} className='butt-edit border-0'>Edit</button>

@@ -57,13 +57,13 @@ function ProductListIS({ todoList, setCodeIS, setTitleIS, setStockIS, setItemIS,
                                 <div key={index} className='flex gr__list'>
                                     <div>{index + 1}</div>
                                     <div>{item.code__is}</div>
-                                    <div>{item.title__is.substring(0, 22)}{item.title.length >= 22 && '...'}</div>
+                                    <div>{item.title__is.substring(0, 22)}{item.title__is.length >= 22 && '...'}</div>
                                     <div>{item.stock__is}</div>
                                     <div>{item.location__is}</div>
                                     <div>{item.unit__is}</div>
-                                    <div className="text-right">{item.amount__is}</div>
-                                    <div className="text-right">{item.price_unit__is}</div>
-                                    <div className="text-right">{item.price_total__is}</div>
+                                    <div className="text-right">{item.amount__is.toLocaleString()}</div>
+                                    <div className="text-right">{item.price_unit__is.toLocaleString()}</div>
+                                    <div className="text-right">{item.price_total__is.toLocaleString()}</div>
 
                                     {todoList ? (<>
                                         <button type='button' onClick={() => handleEdit(item)} className='butt-edit border-0'>Edit</button>

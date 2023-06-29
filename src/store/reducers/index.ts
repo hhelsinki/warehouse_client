@@ -10,8 +10,8 @@ interface State {
     stock: string,
     location: string,
     unit: string,
-    amount: any,
-    price_unit: any,
+    amount: number,
+    price_unit: number,
     price_total: number,
     //issue stock
     items__is: string [],
@@ -23,8 +23,8 @@ interface State {
     stock__is: string,
     location__is: string,
     unit__is: string,
-    amount__is: any,
-    price_unit__is: any,
+    amount__is: number,
+    price_unit__is: number,
     price_total__is: number
 }
 
@@ -39,8 +39,8 @@ const initialState: State = {
     stock: "",
     location: '',
     unit: '',
-    amount: '',
-    price_unit: '',
+    amount: 0,
+    price_unit: 0,
     price_total: 0,
     //issue stock
     items__is: [],
@@ -52,8 +52,8 @@ const initialState: State = {
     stock__is: "",
     location__is: '',
     unit__is: '',
-    amount__is: '',
-    price_unit__is: '',
+    amount__is: 0,
+    price_unit__is: 0,
     price_total__is: 0
 }
 const items = (state = initialState, action:any) => {
@@ -78,8 +78,8 @@ const items = (state = initialState, action:any) => {
                 stock: "",
                 location: "",
                 unit: "",
-                amount: '',
-                price_unit: '',
+                amount: 0,
+                price_unit: 0,
                 price_total: 0,
                 error: "",
             }
@@ -93,8 +93,8 @@ const items = (state = initialState, action:any) => {
                 newList[index].stock = state.stock;
                 newList[index].location = state.location;
                 newList[index].unit = state.unit;
-                newList[index].amount = state.amount;
-                newList[index].price_unit = state.price_unit;
+                newList[index].amount = (state.amount * 1);
+                newList[index].price_unit = (state.price_unit * 1);
                 newList[index].price_total = (state.amount * state.price_unit) * 1;
                 return {
                     ...state,
@@ -103,8 +103,8 @@ const items = (state = initialState, action:any) => {
                     stock: "",
                     location: "",
                     unit: "",
-                    amount: '',
-                    price_unit: '',
+                    amount: 0,
+                    price_unit: 0,
                     price_total: 0,
                     edit: false,
                     items: newList,
@@ -210,8 +210,8 @@ const items = (state = initialState, action:any) => {
                 stock__is: "",
                 location__is: "",
                 unit__is: "",
-                amount__is: '',
-                price_unit__is: '',
+                amount__is: 0,
+                price_unit__is: 0,
                 price_total__is: 0,
                 error__is: "",
             }
@@ -225,8 +225,8 @@ const items = (state = initialState, action:any) => {
                 newList[index].stock__is = state.stock__is;
                 newList[index].location__is = state.location__is;
                 newList[index].unit__is = state.unit__is;
-                newList[index].amount__is = state.amount__is;
-                newList[index].price_unit__is = state.price_unit__is;
+                newList[index].amount__is = (state.amount__is * 1);
+                newList[index].price_unit__is = (state.price_unit__is * 1);
                 newList[index].price_total__is = (state.amount__is * state.price_unit__is) * 1;
                 return {
                     ...state,
@@ -235,8 +235,8 @@ const items = (state = initialState, action:any) => {
                     stock__is: "",
                     location__is: "",
                     unit__is: "",
-                    amount__is: '',
-                    price_unit__is: '',
+                    amount__is: 0,
+                    price_unit__is: 0,
                     price_total__is: 0,
                     edit__is: false,
                     items__is: newList,

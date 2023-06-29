@@ -26,7 +26,7 @@ const HistoryResultIS = () => {
         dp_dep_code: '', dp_dep_title: '',
         dp_receiver_code: '', dp_receiver_name: '',
         remark_i: '', remark_ii: '',
-        total_amount: 0, total_price:0
+        total_amount: 0, total_price: 0
     });
     let { typeId } = useParams();
 
@@ -56,17 +56,7 @@ const HistoryResultIS = () => {
 
     const handleHistoryByQuery = async () => {
         let query: string | null = (new URLSearchParams(window.location.search)).get('id');
-        let param: string = '';
-
-        if (typeId === 'history-gr') {
-            param = 'search-gr?id=';
-            setSearch('../history-gr/search-gr?id=');
-
-        }
-        if (typeId === 'history-is') {
-            param = 'search-is?id=';
-            setSearch('../history-is/search-gr?id=');
-        }
+        setSearch('../history-is/search-is?id=');
 
         const config = {
             method: 'GET',
@@ -75,7 +65,7 @@ const HistoryResultIS = () => {
 
         await axios(config)
             .then((res) => {
-                console.log(res.data.data.recorder.name)
+                console.log(res.data.data.total_amount)
                 switch (res.data.data) {
                     case null: case undefined:
                         break;
@@ -152,7 +142,7 @@ const HistoryResultIS = () => {
                             <option value={credent.rec_code}>EMP-00001</option>
                         </select>
                         <input type="text" value={credent.rec_name} className="width-four m-1-5" readOnly />
-                        <br/>
+                        <br />
                         <label className="width-one-nine m-1-5 inline-block">เลขที่ใบ DP</label>
                         <input type='text' value={credent.dp_no} className="width-two-four" readOnly />
                         <br />
@@ -167,12 +157,12 @@ const HistoryResultIS = () => {
                             <option value={credent.dp_receiver_code}>{credent.dp_receiver_code}</option>
                         </select>
                         <input type="text" value={credent.dp_receiver_name} className="ml-1-5" readOnly />
-                        <br/>
+                        <br />
                         <label>หมายเหตุ</label>
                         <input type="text" value={credent.remark_i} className="width-nine float-right" readOnly />
                         <br />
                         <input type="text" value={credent.remark_ii} className="width-nine float-right mt-1-5" readOnly />
-                        <div style={{marginBottom:'40px'}}></div>
+                        <div style={{ marginBottom: '40px' }}></div>
                     </form>
 
                     <div className="flex stock__list bg-prim">
@@ -186,19 +176,22 @@ const HistoryResultIS = () => {
                         <div className='text-center'>ราคา/หน่วย</div>
                         <div className='text-center'>จำนวนเงิน</div>
                     </div>
-                    {data.map((item: any, index: number) => {
-                        return <div key={index} className="flex stock__list overflow-y-scroll">
-                            <div>{index + 1}</div>
-                            <div>{item.code}</div>
-                            <div>{item.name.substring(0, 25)}{item.name.length >= 25 && '...'}</div>
-                            <div>{item.stock}</div>
-                            <div>{item.location}</div>
-                            <div>{item.unit}</div>
-                            <div className="text-right">{item.amount.toLocaleString()}</div>
-                            <div className="text-right">{item.price_per_unit.toLocaleString()}</div>
-                            <div className="text-right">{item.total.toLocaleString()}</div>
-                        </div>
-                    })}
+                    <div className="history__result overflow-y-scroll">
+                        {data.map((item: any, index: number) => {
+                            return <div key={index} className="flex stock__list overflow-y-scroll">
+                                <div>{index + 1}</div>
+                                <div>{item.code__is}</div>
+                                <div>{item.title__is.substring(0, 25)}{item.title__is.length >= 25 && '...'}</div>
+                                <div>{item.stock__is}</div>
+                                <div>{item.location__is}</div>
+                                <div>{item.unit__is}</div>
+                                <div className="text-right">{item.amount__is.toLocaleString()}</div>
+                                <div className="text-right">{item.price_unit__is.toLocaleString()}</div>
+                                <div className="text-right">{item.price_total__is.toLocaleString()}</div>
+                            </div>
+                        })}
+                    </div>
+
                 </section>
 
                 <section className="width-three-vw height-seven-vh p-df history__list-option">
@@ -216,7 +209,7 @@ const HistoryResultIS = () => {
                     })}
                 </section>
             </div>
-            <div>
+            <div className="absolute" style={{ bottom: '0' }}>
                 <p>รวมจำนวน: {credent.total_amount.toLocaleString()} | เงิน: {credent.total_price.toLocaleString()} บาท</p>
             </div>
         </div >

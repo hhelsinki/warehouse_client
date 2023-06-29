@@ -26,7 +26,7 @@ const HistoryResultGR = () => {
         do_dep_code: '', do_dep_title: '',
         do_receiver_code: '', do_receiver_name: '',
         remark_i: '', remark_ii: '',
-        total_amount: 0, total_price:0
+        total_amount: 0, total_price: 0
     });
     let { typeId } = useParams();
 
@@ -56,14 +56,7 @@ const HistoryResultGR = () => {
 
     const handleHistoryByQuery = async () => {
         let query: string | null = (new URLSearchParams(window.location.search)).get('id');
-
-        if (typeId === 'history-gr') {
-            setSearch('../history-gr/search-gr?id=');
-        }
-        if (typeId === 'history-is') {
-            setSearch('../history-is/search-gr?id=');
-        }
-
+        setSearch('../history-gr/search-gr?id=');
         const config = {
             method: 'GET',
             url: `${process.env.REACT_APP_API}/search-gr?id=${query}`
@@ -119,7 +112,7 @@ const HistoryResultGR = () => {
             <Header />
             <h1 className="text-center">ประวัติรับสินค้า</h1>
             <div className="flex">
-                <section className="width-seven-vw height-seven-vh p-df" style={{ border: '1px solid black' }}>
+                <section className="width-seven-vw height-seven-vh p-df">
                     <form>
                         <label className="width-one inline-block">รหัสผู้ซื้อ</label>
                         <select name='seller id' className="width-two-four">
@@ -148,7 +141,7 @@ const HistoryResultGR = () => {
                             <option value={credent.rec_code}>EMP-00001</option>
                         </select>
                         <input type="text" value={credent.rec_name} className="width-four m-1-5" readOnly />
-                        <br/>
+                        <br />
                         <label className="width-one-nine m-1-5 inline-block">เลขที่ใบ DO</label>
                         <input type='text' value={credent.do_no} className="width-two-four" readOnly />
                         <br />
@@ -163,12 +156,12 @@ const HistoryResultGR = () => {
                             <option value={credent.do_receiver_code}>{credent.do_receiver_code}</option>
                         </select>
                         <input type="text" value={credent.do_receiver_name} className="ml-1-5" readOnly />
-                        <br/>
+                        <br />
                         <label>หมายเหตุ</label>
                         <input type="text" value={credent.remark_i} className="width-nine float-right" readOnly />
                         <br />
                         <input type="text" value={credent.remark_ii} className="width-nine float-right mt-1-5" readOnly />
-                        <div style={{marginBottom:'40px'}}></div>
+                        <div style={{ marginBottom: '40px' }}></div>
                     </form>
 
                     <div className="flex stock__list bg-prim">
@@ -182,19 +175,21 @@ const HistoryResultGR = () => {
                         <div className='text-center'>ราคา/หน่วย</div>
                         <div className='text-center'>จำนวนเงิน</div>
                     </div>
-                    {data.map((item: any, index: number) => {
-                        return <div key={index} className="flex stock__list overflow-y-scroll">
-                            <div>{index + 1}</div>
-                            <div>{item.code}</div>
-                            <div>{item.name.substring(0, 25)}{item.name.length >= 25 && '...'}</div>
-                            <div>{item.stock}</div>
-                            <div>{item.location}</div>
-                            <div>{item.unit}</div>
-                            <div className="text-right">{item.amount.toLocaleString()}</div>
-                            <div className="text-right">{item.price_per_unit.toLocaleString()}</div>
-                            <div className="text-right">{item.total.toLocaleString()}</div>
-                        </div>
-                    })}
+                    <div className="history__result overflow-y-scroll">
+                        {data.map((item: any, index: number) => {
+                            return <div key={index} className="flex stock__list">
+                                <div>{index + 1}</div>
+                                <div>{item.code}</div>
+                                <div>{item.title.substring(0, 25)}{item.title.length >= 25 && '...'}</div>
+                                <div>{item.stock}</div>
+                                <div>{item.location}</div>
+                                <div>{item.unit}</div>
+                                <div className="text-right">{item.amount.toLocaleString()}</div>
+                                <div className="text-right">{item.price_unit.toLocaleString()}</div>
+                                <div className="text-right">{item.price_total.toLocaleString()}</div>
+                            </div>
+                        })}
+                    </div>
                 </section>
 
                 <section className="width-three-vw height-seven-vh p-df history__list-option">
@@ -212,7 +207,7 @@ const HistoryResultGR = () => {
                     })}
                 </section>
             </div>
-            <div>
+            <div className="absolute" style={{ bottom: '0' }}>
                 <p>รวมจำนวน: {credent.total_amount.toLocaleString()} | เงิน: {credent.total_price.toLocaleString()} บาท</p>
             </div>
         </div >

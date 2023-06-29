@@ -26,25 +26,25 @@ const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editIt
             <h3 className='text-center'>เพิ่มสินค้า...</h3>
             <form onSubmit={handleSubmit} className='m-3'>
                 <label>รหัสสินค้า: </label>
-                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} />
-                <br />
+                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} required/>
+                <br/>
                 <label>ชื่อสินค้า: </label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
-                <br />
+                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required/>
+                <br/>
                 <label>คลัง: </label>
-                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} />
-                <br />
+                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} required/>
+                <br/>
                 <label>ที่เก็บ: </label>
-                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} />
-                <br />
+                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} required/>
+                <br/>
                 <label>หน่วยนับ: </label>
-                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} />
-                <br />
+                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} required/>
+                <br/>
                 <label>จำนวน: </label>
-                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} />
-                <br />
+                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} required/>
+                <br/>
                 <label>ราคา/หน่วย: </label>
-                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} />
+                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} required/>
                 <br />
                 <label>จำนวนเงิน: </label>
                 <input type="text" value={price_total} readOnly />

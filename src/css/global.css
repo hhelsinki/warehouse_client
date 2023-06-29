@@ -1,5 +1,6 @@
 
 .relative {position: relative;}
+.absolute {position:absolute;}
 
 .flex {display:flex;}
 .inline-block {display: inline-block;}
@@ -51,6 +52,8 @@
 .butt-del {background: var(--butt-del);}
 
 .col-white {color:#fff;}
+.col-red {color:var(--butt-del);}
+.col-green {color:var(--butt-green);}
 
 .bg-prim {background:var(--bg-prim);}
 .butt-edit {background: var(--butt-edit);}
