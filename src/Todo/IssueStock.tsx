@@ -91,23 +91,30 @@ function IssueStock() {
             url: `${process.env.REACT_APP_API}/issue-stock`,
             data: data
         }
-        console.log(data)
-        try {
-            const res = await axios(config);
-            switch (res.data.status) {
-                case true:
-                    setApiErr({...isApiErr, active:true, txt: res.data.msg });
-                    setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
-                    return window.location.reload();
-                case false: default:
-                    setApiErr({active:true, txt: res.data.msg, txtColor: 'col-red text-center' });
-                    setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
-                    return;
+        //console.log(data)
+
+        if (buyer.id !== '' && doc.no !== '' && doc.date !== '') {
+            try {
+                const res = await axios(config);
+                switch (res.data.status) {
+                    case true:
+                        setApiErr({...isApiErr, active:true, txt: res.data.msg });
+                        setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
+                        return window.location.reload();
+                    case false: default:
+                        setApiErr({active:true, txt: res.data.msg, txtColor: 'col-red text-center' });
+                        setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
+                        return;
+                }
             }
+            catch (err) {
+                console.log('err API: /issue-stock')
+            }
+        } else {
+            setApiErr({ active: true, txt: '*รหัสลูกค้า *เลขที่เอกสาร *วันที่เอกสาร ห้ามมีค่าว่าง', txtColor: 'col-red text-center' });
+            setTimeout(() => { setApiErr({ ...isApiErr, active: false }) }, 5000);
         }
-        catch (err) {
-            console.log('err API: /issue-stock')
-        }
+
     }
 
     //console.log(items);

@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions'
 import { FormEvent } from 'react';
 
-interface Form {
+interface FormGR {
     code: string, setCode: any, title: string, setTitle: any, stock: string, setStock: any, addItem: any, editItem: any, edit: string, location: string, setLocation: any, unit: string, setUnit: any, amount: string, setAmount: any, price_unit: string, setPriceUnit: any, price_total: number, setPriceTotal: any, error: string, setError: any
 }
 
-const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editItem, edit, location, setLocation, unit, setUnit, amount, setAmount, price_unit, setPriceUnit, price_total, setPriceTotal, error, setError }: Form) => {
+const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editItem, edit, location, setLocation, unit, setUnit, amount, setAmount, price_unit, setPriceUnit, price_total, setPriceTotal, error, setError }: FormGR) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,25 +26,46 @@ const Form = ({ code, setCode, title, setTitle, stock, setStock, addItem, editIt
             <h3 className='text-center'>เพิ่มสินค้า...</h3>
             <form onSubmit={handleSubmit} className='m-3'>
                 <label>รหัสสินค้า: </label>
-                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} required/>
-                <br/>
+                <input type="text" onChange={(e) => setCode(e.target.value)} value={code} required />
+                <br />
                 <label>ชื่อสินค้า: </label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required/>
-                <br/>
+                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required />
+                <br />
                 <label>คลัง: </label>
-                <input type="text" onChange={(e) => setStock(e.target.value)} value={stock} required/>
-                <br/>
+                <select onChange={(e) => setStock(e.target.value)} required>
+                    <option value=''>-- STOCK --</option>
+                    <option value='A-01'>A-01</option>
+                    <option value='A-02'>A-02</option>
+                    <option value='A-03'>A-03</option>
+                    <option value='A-04'>A-04</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setStock(e.target.value)} value={stock} required/>*/}
+                <br />
                 <label>ที่เก็บ: </label>
-                <input type="text" onChange={(e) => setLocation(e.target.value)} value={location} required/>
-                <br/>
+                <select onChange={(e) => setLocation(e.target.value)} required>
+                    <option value=''>-- LOCATION --</option>
+                    <option value='01'>01</option>
+                    <option value='02'>02</option>
+                    <option value='03'>03</option>
+                    <option value='04'>04</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setLocation(e.target.value)} value={location} required />*/}
+                <br />
                 <label>หน่วยนับ: </label>
-                <input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} required/>
-                <br/>
+                <select onChange={(e) => setUnit(e.target.value)} required>
+                    <option value=''>-- UNIT --</option>
+                    <option value='PCS'>PCS</option>
+                    <option value='PACK'>PACK</option>
+                    <option value='PAIR'>PAIR</option>
+                    <option value='DOZEN'>DOZEN</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setUnit(e.target.value)} value={unit} required />*/}
+                <br />
                 <label>จำนวน: </label>
-                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} required/>
-                <br/>
+                <input type="number" onChange={(e) => setAmount(e.target.value)} value={amount} required />
+                <br />
                 <label>ราคา/หน่วย: </label>
-                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} required/>
+                <input type="number" onChange={(e) => setPriceUnit(e.target.value)} value={price_unit} required />
                 <br />
                 <label>จำนวนเงิน: </label>
                 <input type="text" value={price_total} readOnly />

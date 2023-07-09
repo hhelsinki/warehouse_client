@@ -217,17 +217,17 @@ const items = (state = initialState, action:any) => {
             }
 
         case actionTypes.EDIT_ITEM__IS:
-            var newList:any = [...state.items__is];
-            var index = newList.indexOf(state.item__is);
+            var newListIS:any = [...state.items__is];
+            var indexIS = newList.indexOf(state.item__is);
             if (index !== -1) {
-                newList[index].code__is = state.code__is;
-                newList[index].title__is = state.title__is;
-                newList[index].stock__is = state.stock__is;
-                newList[index].location__is = state.location__is;
-                newList[index].unit__is = state.unit__is;
-                newList[index].amount__is = (state.amount__is * 1);
-                newList[index].price_unit__is = (state.price_unit__is * 1);
-                newList[index].price_total__is = (state.amount__is * state.price_unit__is) * 1;
+                newListIS[indexIS].code__is = state.code__is;
+                newListIS[indexIS].title__is = state.title__is;
+                newListIS[indexIS].stock__is = state.stock__is;
+                newListIS[indexIS].location__is = state.location__is;
+                newListIS[indexIS].unit__is = state.unit__is;
+                newListIS[indexIS].amount__is = (state.amount__is * 1);
+                newListIS[indexIS].price_unit__is = (state.price_unit__is * 1);
+                newListIS[indexIS].price_total__is = (state.amount__is * state.price_unit__is) * 1;
                 return {
                     ...state,
                     code__is: '',

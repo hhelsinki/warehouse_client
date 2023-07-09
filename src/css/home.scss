@@ -25,7 +25,7 @@
 .gr__insert {width:25vw; border:1px solid var(--butt-green); @extend .border-radius-df;
     form {
         label {width:32%; display:inline-block;}
-        input {width:65%;}
+        input, select {width:65%;}
         button {padding:8px 12px; display:block; margin:5px auto 0 auto; background: var(--bg-second); color:#fff; @extend .border-radius-df;}
     }
 }

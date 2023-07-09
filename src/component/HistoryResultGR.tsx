@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import Header from "../part/Header";
 
 interface Credential {
@@ -28,7 +27,6 @@ const HistoryResultGR = () => {
         remark_i: '', remark_ii: '',
         total_amount: 0, total_price: 0
     });
-    let { typeId } = useParams();
 
     const handleHistory = async () => {
         const config = {
@@ -50,7 +48,7 @@ const HistoryResultGR = () => {
 
             })
             .catch((err) => {
-                console.log('err API: /typeId');
+                console.log('err API: /history-gr');
             })
     }
 

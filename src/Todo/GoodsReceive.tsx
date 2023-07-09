@@ -11,7 +11,7 @@ import axios from "axios";
 import Warning from "../common/Warning";
 
 interface APIerr {
-    active: boolean, txt: string, txtColor:string
+    active: boolean, txt: string, txtColor: string
 }
 
 function GoodsReceive() {
@@ -56,10 +56,10 @@ function GoodsReceive() {
 
     const handleSubmit = async () => {
         let newTotal = items;
-        const totalAmount = newTotal.reduce((prev:number, {amount}: {amount:number})=> {
+        const totalAmount = newTotal.reduce((prev: number, { amount }: { amount: number }) => {
             return prev + (amount * 1);
         }, 0);
-        const totalPrice = newTotal.reduce((prev:number, {price_total}:{price_total:number})=> {
+        const totalPrice = newTotal.reduce((prev: number, { price_total }: { price_total: number }) => {
             return prev + price_total;
         }, 0);
 
@@ -92,23 +92,30 @@ function GoodsReceive() {
         }
         //console.log(data)
 
-        try {
-            const res = await axios(config);
-            console.log(res.data)
-            switch(res.data.status) {
-                case true:
-                    setApiErr({...isApiErr, active:true, txt: res.data.msg });
-                    setTimeout(()=>{setApiErr({...isApiErr, active:false }); window.location.reload();}, 5000);
-                    return; 
-                case false: default:
-                    setApiErr({active:true, txt: res.data.msg, txtColor: 'col-red text-center' });
-                    setTimeout(()=>{setApiErr({...isApiErr, active:false })}, 5000);
-                    return;
+        if (seller.id !== '' && doc.no !== '' && doc.date !== '') {
+            try {
+                const res = await axios(config);
+                console.log(res.data)
+                switch (res.data.status) {
+                    case true:
+                        setApiErr({ ...isApiErr, active: true, txt: res.data.msg });
+                        setTimeout(() => { setApiErr({ ...isApiErr, active: false }); window.location.reload(); }, 5000);
+                        return;
+                    case false: default:
+                        setApiErr({ active: true, txt: res.data.msg, txtColor: 'col-red text-center' });
+                        setTimeout(() => { setApiErr({ ...isApiErr, active: false }) }, 5000);
+                        return;
+                }
             }
+            catch (err) {
+                console.log('err API: /goods-receive');
+            }
+        } else {
+            setApiErr({ active: true, txt: '*รหัสผู้ซื้อ *เลขที่เอกสาร *วันที่เอกสาร ห้ามมีค่าว่าง', txtColor: 'col-red text-center' });
+            setTimeout(() => { setApiErr({ ...isApiErr, active: false }) }, 5000);
         }
-        catch (err) {
-            console.log('err API: /goods-receive');
-        }
+
+
     }
 
 
@@ -213,7 +220,7 @@ function GoodsReceive() {
                 </article>
 
                 {/*modal warning */}
-                {isApiErr.active && (<Warning txt={isApiErr.txt} col={isApiErr.txtColor}/>)}
+                {isApiErr.active && (<Warning txt={isApiErr.txt} col={isApiErr.txtColor} />)}
             </main>
 
         </div>

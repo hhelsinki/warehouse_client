@@ -44,13 +44,34 @@ const FormIS = ({ code__is, setCodeIS, title__is, setTitleIS, stock__is, setStoc
                 <input type="text" onChange={(e) => setTitleIS(e.target.value)} value={title__is} required/>
                 <br />
                 <label>คลัง: </label>
-                <input type="text" onChange={(e) => setStockIS(e.target.value)} value={stock__is} required/>
+                <select onChange={(e) => setStockIS(e.target.value)} required>
+                    <option value=''>-- STOCK --</option>
+                    <option value='A-01'>A-01</option>
+                    <option value='A-02'>A-02</option>
+                    <option value='A-03'>A-03</option>
+                    <option value='A-04'>A-04</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setStockIS(e.target.value)} value={stock__is} required/>*/}
                 <br />
                 <label>ที่เก็บ: </label>
-                <input type="text" onChange={(e) => setLocationIS(e.target.value)} value={location__is} required/>
+                <select onChange={(e) => setLocationIS(e.target.value)} required>
+                    <option value=''>-- LOCATION --</option>
+                    <option value='01'>01</option>
+                    <option value='02'>02</option>
+                    <option value='03'>03</option>
+                    <option value='04'>04</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setLocationIS(e.target.value)} value={location__is} required/>*/}
                 <br />
                 <label>หน่วยนับ: </label>
-                <input type="text" onChange={(e) => setUnitIS(e.target.value)} value={unit__is} required/>
+                <select onChange={(e) => setUnitIS(e.target.value)} required>
+                    <option value=''>-- UNIT --</option>
+                    <option value='PCS'>PCS</option>
+                    <option value='PACK'>PACK</option>
+                    <option value='PAIR'>PAIR</option>
+                    <option value='DOZEN'>DOZEN</option>
+                </select>
+                {/*<input type="text" onChange={(e) => setUnitIS(e.target.value)} value={unit__is} required/>*/}
                 <br />
                 <label>จำนวน: </label>
                 <input type="number" onChange={(e) => setAmountIS(e.target.value)} value={amount__is} required/>
